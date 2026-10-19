@@ -1,0 +1,51 @@
+// =====================================================================
+//  SoluCloud Marketplace — COLORES Y MEDIDAS
+//  Para ajustar la marca, cambie SOLO este archivo.
+//  Paleta inspirada en Monokai Pro Light (solo modo claro).
+// =====================================================================
+:root {
+    // Superficies
+    --mk-bg:          #f6f2f0;   // fondo de página (cálido, deja resaltar tarjetas blancas)
+    --mk-surface:     #ffffff;   // tarjetas, encabezado
+    --mk-surface-2:   #f2ebe9;   // hover, barra de categorías
+    --mk-border:      #e5dedc;
+    --mk-dark:        #2d2a2e;   // barra superior y pie (Monokai Pro)
+    --mk-dark-2:      #403e41;
+
+    // Texto
+    --mk-text:        #29242a;
+    --mk-text-muted:  #6e686b;
+    --mk-text-dim:    #918c8e;
+    --mk-on-dark:     #fcfcfa;
+    --mk-on-dark-muted: #c1c0bf;
+
+    // Acentos Monokai Pro Light (contraste AA sobre blanco)
+    --mk-red:         #c7365f;
+    --mk-orange:      #c4501e;
+    --mk-yellow:      #ffd866;   // solo sobre fondo oscuro
+    --mk-green:       #1d7d53;
+    --mk-blue:        #14708a;
+    --mk-purple:      #6650b0;
+
+    // Roles
+    --mk-primary:        var(--mk-orange);   // Buscar, Agregar al carrito, Pagar
+    --mk-primary-hover:  #a8431a;
+    --mk-primary-text:   #ffffff;
+    --mk-link:           var(--mk-blue);
+    --mk-price:          var(--mk-green);
+    --mk-sale:           var(--mk-red);
+    --mk-focus:          rgba(196, 80, 30, .30);
+
+    // Forma
+    --mk-radius:      10px;
+    --mk-radius-sm:   6px;
+    --mk-shadow:      0 1px 2px rgba(41, 36, 42, .06), 0 4px 16px rgba(41, 36, 42, .06);
+    --mk-shadow-hover: 0 8px 28px rgba(41, 36, 42, .14);
+    --mk-font:        "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mk-mono:        "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    // Franja "filtro" de Monokai Pro (rojo → morado)
+    --mk-filter-strip: linear-gradient(90deg,
+        #ff6188 0 16.66%, #fc9867 0 33.33%, #ffd866 0 50%,
+        #a9dc76 0 66.66%, #78dce8 0 83.33%, #ab9df2 0 100%);
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+        Encabezado tipo marketplace (escritorio).
+        Hereda de website.template_header_default (el encabezado estándar,
+        activo por defecto) y reemplaza su contenido. Si alguien elige otro
+        encabezado en el editor, este simplemente deja de aplicarse: no rompe.
+        priority=99 para aplicarse DESPUÉS de website_sale (que inserta el
+        carrito en el encabezado estándar).
+    -->
+    <template id="mk_header_desktop" inherit_id="website.template_header_default"
+              name="SoluCloud: encabezado marketplace" priority="99">
+        <xpath expr="//t[@t-set='_navbar_classes']" position="replace">
+            <t t-set="_navbar_classes" t-valuef="mk-navbar d-none d-lg-block p-0"/>
+        </xpath>
+        <xpath expr="//div[@id='o_main_nav']" position="replace">
+            <div id="o_main_nav" class="o_main_nav mk-header w-100 d-flex flex-column align-items-stretch">
+
+                <!-- Fila 1: barra superior oscura con el menú del sitio -->
+                <div class="mk-topbar">
+                    <div class="container d-flex align-items-center justify-content-between gap-3">
+                        <span class="mk-topbar-msg">
+                            <i class="fa fa-truck me-2" aria-hidden="true"/>Envíos a toda Guatemala
+                        </span>
+                        <t t-call="website.navbar_nav">
+                            <t t-set="_nav_class" t-valuef="mk-topbar-menu flex-row gap-1"/>
+                            <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                <t t-call="website.submenu">
+                                    <t t-set="item_class" t-valuef="nav-item"/>
+                                    <t t-set="link_class" t-valuef="nav-link"/>
+                                </t>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Fila 2: logo | buscador grande | cuenta | carrito -->
+                <div class="mk-mainbar">
+                    <div class="container d-flex align-items-center gap-4">
+                        <t t-call="website.placeholder_header_brand">
+                            <t t-set="_link_class" t-valuef="mk-brand me-0"/>
+                        </t>
+                        <div class="mk-search flex-grow-1">
+                            <t t-call="website.website_search_box_input"
+                               t-nocache="The searchbox should not cache previous searches.">
+                                <t t-set="_form_classes" t-valuef="w-100"/>
+                                <t t-set="_classes" t-valuef="mk-search-group"/>
+                                <t t-set="_input_classes" t-valuef="mk-search-input"/>
+                                <t t-set="_submit_classes" t-valuef="mk-search-btn"/>
+                                <t t-set="default_style" t-value="True"/>
+                                <t t-set="search_type" t-valuef="products"/>
+                                <t t-set="action" t-valuef="/shop"/>
+                                <t t-set="limit" t-valuef="6"/>
+                                <t t-set="display_image" t-valuef="true"/>
+                                <t t-set="display_description" t-valuef="false"/>
+                                <t t-set="display_extra_link" t-valuef="true"/>
+                                <t t-set="display_detail" t-valuef="true"/>
+                                <t t-set="placeholder">Buscar productos, marcas y más…</t>
+                            </t>
+                        </div>
+                        <ul class="navbar-nav flex-row align-items-center gap-2 mk-actions">
+                            <t t-call="portal.placeholder_user_sign_in">
+                                <t t-set="_link_class" t-valuef="mk-action nav-link"/>
+                            </t>
+                            <t t-call="portal.user_dropdown">
+                                <t t-set="_user_name" t-value="True"/>
+                                <t t-set="_icon" t-value="True"/>
+                                <t t-set="_item_class" t-valuef="dropdown"/>
+                                <t t-set="_icon_wrap_class" t-valuef="d-inline-block me-1"/>
+                                <t t-set="_link_class" t-valuef="mk-action nav-link d-flex align-items-center"/>
+                                <t t-set="_dropdown_menu_class" t-valuef="dropdown-menu-end"/>
+                            </t>
+                            <t t-call="website_sale.header_cart_link">
+                                <t t-set="_icon" t-value="True"/>
+                                <t t-set="_text" t-value="True"/>
+                                <t t-set="_link_class" t-valuef="mk-action mk-cart nav-link d-flex align-items-center gap-1"/>
+                                <t t-set="_icon_wrap_class" t-valuef="position-relative"/>
+                                <t t-set="_badge_class" t-valuef="position-absolute top-0 start-100 translate-middle rounded-pill"/>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fila 3: barra de categorías (categorías raíz de la tienda) -->
+                <t t-set="mk_categs" t-value="request.env['product.public.category'].search([('parent_id', '=', False)] + request.website.website_domain(), limit=12)"/>
+                <div class="mk-catbar">
+                    <div class="container d-flex align-items-center gap-1">
+                        <a href="/shop" class="mk-cat mk-cat-all">
+                            <i class="fa fa-bars me-2" aria-hidden="true"/>Todas las categorías
+                        </a>
+                        <t t-foreach="mk_categs" t-as="mk_categ">
+                            <a t-att-href="'/shop/category/%s' % slug(mk_categ)"
+                               class="mk-cat" t-esc="mk_categ.name"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!--
+        Móvil: buscador de productos siempre visible debajo del logo
+        (la mayoría de compras en Guatemala son desde el celular).
+    -->
+    <template id="mk_header_mobile" inherit_id="website.template_header_mobile"
+              name="SoluCloud: buscador móvil" priority="99">
+        <xpath expr="//ul[hasclass('o_header_mobile_buttons_wrap')]" position="after">
+            <div class="mk-mobile-search w-100 pt-2">
+                <t t-call="website.website_search_box_input"
+                   t-nocache="The searchbox should not cache previous searches.">
+                    <t t-set="_form_classes" t-valuef="w-100"/>
+                    <t t-set="_classes" t-valuef="mk-search-group"/>
+                    <t t-set="_input_classes" t-valuef="mk-search-input"/>
+                    <t t-set="_submit_classes" t-valuef="mk-search-btn"/>
+                    <t t-set="default_style" t-value="True"/>
+                    <t t-set="search_type" t-valuef="products"/>
+                    <t t-set="action" t-valuef="/shop"/>
+                    <t t-set="limit" t-valuef="5"/>
+                    <t t-set="display_image" t-valuef="true"/>
+                    <t t-set="display_description" t-valuef="false"/>
+                    <t t-set="display_extra_link" t-valuef="true"/>
+                    <t t-set="display_detail" t-valuef="true"/>
+                    <t t-set="placeholder">Buscar productos…</t>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-set='_navbar_classes']" position="replace">
+            <t t-set="_navbar_classes" t-valuef="mk-navbar-mobile o_header_mobile d-block d-lg-none"/>
+        </xpath>
+    </template>
+
+    <!-- Botón "Agregar al carrito" visible en cada tarjeta de la tienda
+         (opción estándar de Odoo; se puede apagar desde el editor). -->
+    <record id="website_sale.products_add_to_cart" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+
+    <!-- Fuentes: Inter (texto) y JetBrains Mono (precios) -->
+    <template id="mk_fonts" inherit_id="website.layout" name="SoluCloud: fuentes">
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+            <link rel="stylesheet"
+                  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@600;700&amp;display=swap"/>
+        </xpath>
+    </template>
+</odoo>
