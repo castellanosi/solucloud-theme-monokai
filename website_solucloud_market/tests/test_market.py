@@ -35,3 +35,8 @@ class TestMarketHeader(HttpCase):
     def test_add_to_cart_option_active(self):
         view = self.env.ref("website_sale.products_add_to_cart")
         self.assertTrue(view.active)
+
+    def test_single_brand_font(self):
+        html = self._shop_html()
+        self.assertIn("family=Inter", html)
+        self.assertNotIn("JetBrains", html, "Solo debe cargarse la fuente Inter")
