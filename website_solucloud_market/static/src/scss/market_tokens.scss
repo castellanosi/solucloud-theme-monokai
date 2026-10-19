@@ -1,51 +1,64 @@
 // =====================================================================
-//  SoluCloud Marketplace — COLORES Y MEDIDAS
-//  Para ajustar la marca, cambie SOLO este archivo.
-//  Paleta inspirada en Monokai Pro Light (solo modo claro).
+//  SoluCloud Marketplace — IDENTIDAD "ATARDECER"
+//  Fuente única de colores, tipografía y formas. Documentado en
+//  docs/MARCA.md (mantener ambos archivos sincronizados).
+//  Solo modo claro.
 // =====================================================================
 :root {
-    // Superficies
-    --mk-bg:          #f6f2f0;   // fondo de página (cálido, deja resaltar tarjetas blancas)
+    // ---- Colores de marca ----
+    --mk-sunrise:     #ff8a3d;   // naranja amanecer (inicio del degradado)
+    --mk-coral:       #ff4d6d;   // coral: color principal de la marca
+    --mk-coral-deep:  #e11d48;   // rosa intenso: botones y texto sobre blanco (AA 4.7)
+    --mk-ember:       #d63a1a;   // brasa: inicio del degradado con texto (AA 4.69)
+    --mk-plum:        #b8338f;   // ciruela: centro del degradado con texto (AA 5.37)
+    --mk-orchid:      #c13fe0;   // orquídea (centro del degradado)
+    --mk-violet:      #6b3fe0;   // violeta (enlaces, final del degradado)
+    --mk-sun:         #ffd23f;   // amarillo sol (detalles, foco, estrellas)
+
+    // ---- Neutros ----
+    --mk-night:       #1b1530;   // noche: barra superior, pie, texto principal
+    --mk-night-2:     #2b2346;   // noche clara (hover sobre oscuro)
+    --mk-bg:          #f6f4fb;   // fondo de página (lavanda muy claro)
     --mk-surface:     #ffffff;   // tarjetas, encabezado
-    --mk-surface-2:   #f2ebe9;   // hover, barra de categorías
-    --mk-border:      #e5dedc;
-    --mk-dark:        #2d2a2e;   // barra superior y pie (Monokai Pro)
-    --mk-dark-2:      #403e41;
+    --mk-surface-2:   #f0ecf8;   // hover, campos
+    --mk-border:      #e8e3f3;
+    --mk-text:        #1b1530;
+    --mk-text-muted:  #5f5873;
+    --mk-text-dim:    #8d87a0;
+    --mk-on-dark:     #ffffff;
+    --mk-on-dark-muted: #c9c3dc;
 
-    // Texto
-    --mk-text:        #29242a;
-    --mk-text-muted:  #6e686b;
-    --mk-text-dim:    #918c8e;
-    --mk-on-dark:     #fcfcfa;
-    --mk-on-dark-muted: #c1c0bf;
+    // ---- Estados ----
+    --mk-success:     #12805c;   // en existencia, entrega
+    --mk-warning:     #b26a00;   // pocas unidades
+    --mk-danger:      #d92f52;   // errores
 
-    // Acentos Monokai Pro Light (contraste AA sobre blanco)
-    --mk-red:         #c7365f;
-    --mk-orange:      #c4501e;
-    --mk-yellow:      #ffd866;   // solo sobre fondo oscuro
-    --mk-green:       #1d7d53;
-    --mk-blue:        #14708a;
-    --mk-purple:      #6650b0;
-
-    // Roles
-    --mk-primary:        var(--mk-orange);   // Buscar, Agregar al carrito, Pagar
-    --mk-primary-hover:  #a8431a;
+    // ---- Roles (usar estos en las reglas) ----
+    --mk-primary:        var(--mk-coral-deep);
+    --mk-primary-hover:  #be123c;
     --mk-primary-text:   #ffffff;
-    --mk-link:           var(--mk-blue);
-    --mk-price:          var(--mk-green);
-    --mk-sale:           var(--mk-red);
-    --mk-focus:          rgba(196, 80, 30, .30);
+    --mk-link:           var(--mk-violet);
+    --mk-price:          var(--mk-night);
+    --mk-sale:           var(--mk-coral-deep);
+    --mk-focus:          rgba(255, 77, 109, .30);
 
-    // Forma
-    --mk-radius:      10px;
-    --mk-radius-sm:   6px;
-    --mk-shadow:      0 1px 2px rgba(41, 36, 42, .06), 0 4px 16px rgba(41, 36, 42, .06);
-    --mk-shadow-hover: 0 8px 28px rgba(41, 36, 42, .14);
-    --mk-font:        "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --mk-mono:        "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    // ---- Degradados ----
+    // Vivo: SOLO decorativo (franjas, fondos de banner, bordes). Sin texto encima.
+    --mk-gradient:       linear-gradient(90deg, #ff8a3d 0%, #ff4d6d 40%, #c13fe0 75%, #6b3fe0 100%);
+    // Con texto blanco encima (barra de categorías): todos los tonos pasan AA.
+    --mk-gradient-ui:    linear-gradient(90deg, #d63a1a 0%, #e11d48 35%, #b8338f 70%, #6b3fe0 100%);
+    // Botones de compra (texto blanco, AA).
+    --mk-gradient-cta:   linear-gradient(120deg, #d63a1a 0%, #e11d48 100%);
+    --mk-gradient-cta-hover: linear-gradient(120deg, #b8300f 0%, #be123c 100%);
 
-    // Franja "filtro" de Monokai Pro (rojo → morado)
-    --mk-filter-strip: linear-gradient(90deg,
-        #ff6188 0 16.66%, #fc9867 0 33.33%, #ffd866 0 50%,
-        #a9dc76 0 66.66%, #78dce8 0 83.33%, #ab9df2 0 100%);
+    // ---- Formas ----
+    --mk-radius-lg:   16px;   // tarjetas, banners
+    --mk-radius:      12px;   // cajas
+    --mk-radius-sm:   8px;    // campos
+    --mk-radius-pill: 999px;  // botones, buscador, chips
+    --mk-shadow:       0 1px 2px rgba(27, 21, 48, .05), 0 4px 16px rgba(27, 21, 48, .06);
+    --mk-shadow-hover: 0 10px 30px rgba(27, 21, 48, .14);
+
+    // ---- Tipografía (una sola familia: carga más rápida) ----
+    --mk-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }

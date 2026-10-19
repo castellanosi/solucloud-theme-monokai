@@ -135,13 +135,13 @@
         <field name="active" eval="True"/>
     </record>
 
-    <!-- Fuentes: Inter (texto) y JetBrains Mono (precios) -->
+    <!-- Fuente de la marca: solo Inter (una descarga, carga más rápida) -->
     <template id="mk_fonts" inherit_id="website.layout" name="SoluCloud: fuentes">
         <xpath expr="//div[@id='wrapwrap']" position="before">
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
             <link rel="stylesheet"
-                  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@600;700&amp;display=swap"/>
+                  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"/>
         </xpath>
     </template>
 </odoo>

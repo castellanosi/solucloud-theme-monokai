@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # Apariencia tipo marketplace para la tienda SoluCloud (Odoo 18 CE nativo).
 # No depende de ningún tema: hereda las plantillas estándar de website y
-# website_sale. Paleta inspirada en Monokai Pro Light.
+# website_sale. Identidad visual "Atardecer" (ver docs/MARCA.md).
 {
     "name": "SoluCloud Marketplace",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.2.0",
     # Categoría normal (no "Theme") a propósito: se instala desde Apps o por
     # comando y sus vistas aplican a todos los sitios.
     "category": "Website/Website",
     "summary": "Encabezado tipo marketplace con buscador grande, barra de "
-    "categorías y tarjetas de producto (paleta Monokai Pro Light)",
+    "categorías y tarjetas de producto (identidad Atardecer)",
     "author": "SoluCloud",
     "depends": ["website_sale"],
     "data": [

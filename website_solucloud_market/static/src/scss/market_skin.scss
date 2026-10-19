@@ -1,8 +1,12 @@
 // =====================================================================
-//  SoluCloud Marketplace — ESTILOS
-//  Solo aplica al sitio web (bundle web.assets_frontend), no al backend.
-//  Estructura: 1 Base · 2 Encabezado · 3 Tienda · 4 Producto ·
-//              5 Carrito/checkout · 6 Formularios/botones · 7 Pie
+//  SoluCloud Marketplace — ESTILOS "ATARDECER" (v18.0.1.2.0)
+//  Solo aplica al sitio web (bundle web.assets_frontend).
+//  Índice:
+//    1 Base            5 Página de producto     9  Carruseles y banners
+//    2 Encabezado      6 Carrito y checkout     10 Pie de página
+//    3 Tienda/filtros  7 Botones y formularios  11 Accesibilidad
+//    4 Tarjetas        8 Paginación
+//  Regla de oro: los colores salen de market_tokens.scss (var(--mk-*)).
 // =====================================================================
 
 // ---------- 1. Base ----------
@@ -14,205 +18,241 @@
     --bs-link-hover-color: var(--mk-primary);
     --bs-border-color: var(--mk-border);
     --bs-secondary-color: var(--mk-text-muted);
+    --bs-primary: var(--mk-primary);
 }
-
-body,
-#wrapwrap {
+body, #wrapwrap, #wrapwrap > main {
     background-color: var(--mk-bg);
     color: var(--mk-text);
     font-family: var(--mk-font);
 }
-#wrapwrap > main { background-color: var(--mk-bg); }
-
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: var(--mk-font);
     color: var(--mk-text);
-    letter-spacing: -.01em;
+    letter-spacing: -.015em;
 }
-
+h1, .h1 { font-weight: 800; }
+h2, .h2, h3, .h3 { font-weight: 700; }
 a { color: var(--mk-link); }
 a:hover { color: var(--mk-primary); }
-
-::selection { background: var(--mk-yellow); color: var(--mk-dark); }
-
-:focus-visible {
-    outline: 2px solid var(--mk-primary);
-    outline-offset: 2px;
-}
+::selection { background: var(--mk-sun); color: var(--mk-night); }
+:focus-visible { outline: 2px solid var(--mk-coral); outline-offset: 2px; }
+.text-primary { color: var(--mk-primary) !important; }
+.bg-primary, .text-bg-primary { background-color: var(--mk-primary) !important; color: #fff !important; }
 
 // ---------- 2. Encabezado ----------
 header#top {
     background: var(--mk-surface);
-    box-shadow: 0 1px 0 var(--mk-border), 0 2px 12px rgba(41, 36, 42, .05);
-    border-top: 4px solid transparent;
-    border-image: var(--mk-filter-strip) 1;
+    box-shadow: 0 2px 14px rgba(27, 21, 48, .06);
 }
-
-.mk-navbar,
-.mk-navbar-mobile {
+.mk-navbar, .mk-navbar-mobile {
     background: var(--mk-surface) !important;
     box-shadow: none !important;
 }
 .mk-navbar { padding: 0 !important; }
+.mk-header a, .mk-header a:hover { text-decoration: none; }
 
-.mk-header { padding: 0; }
-
-// Fila 1: barra superior
+// Fila 1: barra superior (noche)
 .mk-topbar {
-    background: var(--mk-dark);
+    background: var(--mk-night);
     color: var(--mk-on-dark-muted);
     font-size: .8125rem;
+    border-top: 3px solid transparent;
+    border-image: var(--mk-gradient) 1;
     .container { min-height: 36px; }
-    .mk-topbar-msg { color: var(--mk-on-dark); }
-    .mk-topbar-msg .fa { color: var(--mk-yellow); }
+    .mk-topbar-msg { color: var(--mk-on-dark); font-weight: 500; }
+    .mk-topbar-msg .fa { color: var(--mk-sun); }
     .nav-link {
         color: var(--mk-on-dark-muted) !important;
-        padding: .35rem .6rem !important;
-        &:hover, &.active { color: var(--mk-yellow) !important; }
+        padding: .35rem .65rem !important;
+        &:hover, &.active { color: var(--mk-sun) !important; }
     }
-    .dropdown-menu { font-size: .875rem; }
 }
 
 // Fila 2: logo | buscador | cuenta | carrito
 .mk-mainbar {
     background: var(--mk-surface);
-    .container { min-height: 76px; }
-    .mk-brand img { max-height: 52px; width: auto; }
+    .container { min-height: 84px; }
 }
-
+.mk-mainbar .navbar-brand.logo img,
+.mk-mainbar .mk-brand img {
+    height: 64px !important;
+    max-height: none !important;
+    width: auto !important;
+}
 .mk-search-group {
     display: flex;
     flex-wrap: nowrap;
-    border: 2px solid var(--mk-primary);
-    border-radius: var(--mk-radius);
+    align-items: center;
+    background: var(--mk-surface-2);
+    border: 2px solid var(--mk-border);
+    border-radius: var(--mk-radius-pill);
     overflow: hidden;
-    background: var(--mk-surface);
+    transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
     .mk-search-input {
         border: 0 !important;
         box-shadow: none !important;
-        padding: .7rem 1rem;
+        background: transparent !important;
+        padding: .75rem 1.25rem;
         font-size: 1rem;
-        background: transparent;
         &::placeholder { color: var(--mk-text-dim); }
     }
     .mk-search-btn {
-        background: var(--mk-primary) !important;
+        background: var(--mk-gradient-cta) !important;
         border: 0 !important;
-        border-radius: 0 !important;
-        color: var(--mk-primary-text) !important;
-        padding: 0 1.4rem;
+        border-radius: var(--mk-radius-pill) !important;
+        color: #fff !important;
+        margin: 4px;
+        padding: .55rem 1.35rem;
         font-size: 1.05rem;
-        &:hover { background: var(--mk-primary-hover) !important; }
+        &:hover { background: var(--mk-gradient-cta-hover) !important; }
     }
-    &:focus-within { box-shadow: 0 0 0 .25rem var(--mk-focus); }
+    &:focus-within {
+        background: var(--mk-surface);
+        border-color: var(--mk-coral);
+        box-shadow: 0 0 0 .25rem var(--mk-focus);
+    }
 }
-
 .mk-actions {
     .mk-action {
         color: var(--mk-text) !important;
         font-weight: 600;
         font-size: .9rem;
-        padding: .5rem .75rem !important;
-        border-radius: var(--mk-radius-sm);
+        padding: .55rem .9rem !important;
+        border-radius: var(--mk-radius-pill);
         white-space: nowrap;
         &:hover { background: var(--mk-surface-2); color: var(--mk-primary) !important; }
     }
     .mk-cart .fa-shopping-cart { font-size: 1.35rem; color: var(--mk-text); }
     .mk-cart:hover .fa-shopping-cart { color: var(--mk-primary); }
-    .my_cart_quantity {
-        background: var(--mk-sale) !important;
-        color: #fff !important;
-        font-family: var(--mk-mono);
-        font-size: .7rem;
-    }
+}
+.my_cart_quantity {
+    background: var(--mk-gradient-cta) !important;
+    color: #fff !important;
+    font-size: .7rem;
+    font-weight: 700;
 }
 
-// Fila 3: barra de categorías
+// Fila 3: barra de categorías con degradado (texto blanco, AA)
 .mk-catbar {
-    background: var(--mk-surface);
-    border-top: 1px solid var(--mk-border);
+    background: var(--mk-gradient-ui);
     .container {
         overflow-x: auto;
         scrollbar-width: none;
-        min-height: 44px;
+        min-height: 46px;
         &::-webkit-scrollbar { display: none; }
     }
     .mk-cat {
         flex: 0 0 auto;
-        color: var(--mk-text);
+        color: #fff !important;
         font-size: .875rem;
-        font-weight: 500;
-        padding: .45rem .8rem;
-        border-radius: var(--mk-radius-sm);
-        text-decoration: none;
+        font-weight: 600;
+        padding: .4rem .85rem;
+        border-radius: var(--mk-radius-pill);
         white-space: nowrap;
-        &:hover { background: var(--mk-surface-2); color: var(--mk-primary); }
+        &:hover { background: rgba(255, 255, 255, .18); color: #fff !important; }
     }
     .mk-cat-all {
-        background: var(--mk-dark);
-        color: var(--mk-on-dark);
-        font-weight: 600;
+        background: #fff !important;
+        color: var(--mk-night) !important;
         margin-right: .5rem;
-        &:hover { background: var(--mk-dark-2); color: var(--mk-yellow); }
+        .fa { color: var(--mk-night) !important; }
+        &:hover { background: var(--mk-sun) !important; }
     }
 }
 
 // Móvil
 .mk-navbar-mobile {
-    .navbar-brand img { max-height: 40px; width: auto; }
-    .mk-mobile-search .mk-search-input { padding: .55rem .8rem; }
-    .mk-mobile-search .mk-search-btn { padding: 0 1rem; }
-    .my_cart_quantity { background: var(--mk-sale) !important; }
+    border-top: 3px solid transparent;
+    border-image: var(--mk-gradient) 1;
+    .navbar-brand.logo img { height: 44px !important; width: auto !important; }
+    .mk-mobile-search .mk-search-input { padding: .6rem 1rem; }
+    .mk-mobile-search .mk-search-btn { padding: .45rem 1rem; }
+}
+// Menú lateral del celular: botón "Contáctanos" y "Iniciar sesión"
+.o_navbar_mobile {
+    .btn-primary { border-radius: var(--mk-radius-pill) !important; }
+    .btn-outline-primary, .o_nav_link_btn { border-radius: var(--mk-radius-pill) !important; }
 }
 
-// ---------- 3. Tienda (/shop) ----------
-.oe_website_sale,
-#wrap.js_sale { background: var(--mk-bg); }
+// ---------- 3. Tienda: filtros y categorías ----------
+// Un solo buscador: se oculta el interno de /shop y de la ficha
+.o_wsale_products_searchbar_form { display: none !important; }
 
-// Filtros laterales en tarjeta blanca
 #products_grid_before {
-    > div, .o_wsale_products_grid_before_rail {
+    background: transparent !important;
+    align-self: flex-start;
+    > div {
+        height: auto !important;
         background: var(--mk-surface);
         border: 1px solid var(--mk-border);
-        border-radius: var(--mk-radius);
-        padding: 1rem;
+        border-radius: var(--mk-radius-lg);
+        padding: 1.1rem;
     }
-    a { color: var(--mk-text); }
+    a { color: var(--mk-text); text-decoration: none; }
     a:hover, .active > a, a.active { color: var(--mk-primary); }
-    .form-check-input:checked { background-color: var(--mk-primary); border-color: var(--mk-primary); }
+}
+.form-check-input:checked {
+    background-color: var(--mk-primary) !important;
+    border-color: var(--mk-primary) !important;
 }
 
-// Tira de categorías (filmstrip) como "chips"
+// Categorías en círculos (tira superior de /shop)
 .o_wsale_filmstip {
-    .o_wsale_filmstip_wrapper a, li a, .o_categ_link {
-        background: var(--mk-surface);
-        border: 1px solid var(--mk-border);
-        border-radius: 999px;
-        color: var(--mk-text);
-        &:hover { border-color: var(--mk-primary); color: var(--mk-primary); }
+    gap: .25rem;
+    a, a:hover { text-decoration: none !important; }
+    li a > .btn {
+        flex-direction: column;
+        gap: .4rem;
+        background: transparent !important;
+        border: 0 !important;
+        padding: .25rem .5rem !important;
+        color: var(--mk-text) !important;
+        font-size: .82rem;
+        font-weight: 600;
+        white-space: nowrap;
+        box-shadow: none !important;
     }
+    .o_image_40_cover {
+        width: 76px !important;
+        height: 76px !important;
+        margin: 0 !important;
+        border-radius: 50% !important;
+        background-color: #fff;
+        background-size: 70% !important;
+        background-repeat: no-repeat;
+        box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--mk-border);
+        transition: box-shadow .2s ease, transform .2s ease;
+    }
+    li a:hover .o_image_40_cover,
+    .btn-check:checked + .btn .o_image_40_cover {
+        box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--mk-coral);
+        transform: translateY(-2px);
+    }
+    .btn-check:checked + .btn { color: var(--mk-primary) !important; }
 }
 
-// Tarjeta de producto
-.oe_product_cart {
-    background: var(--mk-surface);
+// ---------- 4. Tarjetas de producto ----------
+.oe_product_cart,
+.o_carousel_product_card {
+    background: var(--mk-surface) !important;
     border: 1px solid var(--mk-border) !important;
-    border-radius: var(--mk-radius) !important;
+    border-radius: var(--mk-radius-lg) !important;
     overflow: hidden;
     box-shadow: var(--mk-shadow);
-    transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
+    transition: box-shadow .18s ease, transform .18s ease;
     &:hover {
         box-shadow: var(--mk-shadow-hover);
-        transform: translateY(-2px);
-        border-color: #d7cfcc !important;
+        transform: translateY(-3px);
     }
+    a { text-decoration: none; }
+}
+.oe_product_cart {
     .oe_product_image { background: #fff; }
-    .o_wsale_product_information { padding: .75rem .9rem .9rem; }
+    .o_wsale_product_information { padding: .8rem 1rem 1rem; }
     .o_wsale_products_item_title {
-        font-size: .9rem;
+        font-size: .92rem;
         font-weight: 500;
         line-height: 1.35;
-        // Máximo 2 líneas de nombre: tarjetas parejas
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -223,87 +263,97 @@ header#top {
     }
     .o_wsale_product_sub { margin-top: auto; }
     .o_wsale_product_btn .btn {
-        background: var(--mk-primary);
-        border-color: var(--mk-primary);
-        color: var(--mk-primary-text);
-        border-radius: var(--mk-radius-sm);
-        &:hover { background: var(--mk-primary-hover); border-color: var(--mk-primary-hover); }
+        background: var(--mk-gradient-cta) !important;
+        border: 0 !important;
+        color: #fff !important;
+        border-radius: var(--mk-radius-pill) !important;
+        width: 2.4rem;
+        height: 2.4rem;
+        &:hover { background: var(--mk-gradient-cta-hover) !important; }
+    }
+    // Precio anterior arriba, actual abajo
+    .product_price {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-end;
+        line-height: 1.15;
+        white-space: nowrap;
+        del { margin: 0 !important; font-size: .8rem; }
     }
 }
+.o_carousel_product_card {
+    .card-title, .card-body a, .o_carousel_product_card_body a {
+        color: var(--mk-text) !important;
+        font-weight: 500;
+        &:hover { color: var(--mk-primary) !important; }
+    }
+    .btn-primary { border-radius: var(--mk-radius-pill) !important; }
+}
 
-// Precios: verde, monoespaciado, fáciles de comparar
+// Precios: grandes, gruesos y alineados (Inter, sin fuente extra)
 .product_price .oe_price,
 .product_price .h6,
 .oe_product_cart .product_price > span:first-child,
+.o_carousel_product_card .oe_currency_value,
 #product_details .product_price .oe_price,
 .oe_currency_value {
     color: var(--mk-price);
-    font-family: var(--mk-mono);
-    font-weight: 700;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
 }
-.oe_product_cart .product_price .h6 { font-size: 1.05rem; }
-.product_price del,
-.oe_default_price,
-del .oe_currency_value {
+.oe_product_cart .product_price .h6 { font-size: 1.15rem; }
+.product_price del, .oe_default_price, del .oe_currency_value {
     color: var(--mk-text-dim) !important;
-    font-family: var(--mk-mono);
     font-weight: 500;
 }
 
-// Etiquetas (ribbons) de oferta
+// Etiquetas de oferta (ribbons)
 .o_ribbon:not(:empty) {
-    font-family: var(--mk-mono);
     font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .02em;
+    font-weight: 800;
+    letter-spacing: .03em;
+    text-transform: uppercase;
 }
 
-// Paginación
-.pagination {
-    --bs-pagination-color: var(--mk-text);
-    --bs-pagination-hover-color: var(--mk-primary);
-    --bs-pagination-active-bg: var(--mk-primary);
-    --bs-pagination-active-border-color: var(--mk-primary);
-    --bs-pagination-border-radius: var(--mk-radius-sm);
-    font-family: var(--mk-mono);
-}
-
-// ---------- 4. Página de producto ----------
+// ---------- 5. Página de producto ----------
 #product_detail {
-    #product_details h1 { font-weight: 700; font-size: 1.6rem; }
+    #product_details h1 { font-weight: 800; font-size: 1.65rem; }
     #o-carousel-product {
         background: var(--mk-surface);
         border: 1px solid var(--mk-border);
-        border-radius: var(--mk-radius);
+        border-radius: var(--mk-radius-lg);
         overflow: hidden;
     }
-    #product_details .product_price .oe_price { font-size: 1.8rem; }
-    .css_quantity input { font-family: var(--mk-mono); }
+    #product_details .product_price .oe_price { font-size: 2rem; }
 }
 #add_to_cart,
-.o_we_buy_now,
-#product_detail .btn-primary {
-    background: var(--mk-primary);
-    border-color: var(--mk-primary);
-    color: var(--mk-primary-text);
-    font-weight: 600;
-    padding: .7rem 1.4rem;
-    border-radius: var(--mk-radius-sm);
-    &:hover { background: var(--mk-primary-hover); border-color: var(--mk-primary-hover); }
+#product_detail .btn-primary.a-submit {
+    background: var(--mk-gradient-cta) !important;
+    border: 0 !important;
+    color: #fff !important;
+    font-weight: 700;
+    padding: .8rem 1.6rem;
+    border-radius: var(--mk-radius-pill) !important;
+    box-shadow: 0 6px 18px rgba(225, 29, 72, .28);
+    &:hover { background: var(--mk-gradient-cta-hover) !important; }
 }
 .o_we_buy_now {
-    background: var(--mk-dark);
-    border-color: var(--mk-dark);
-    &:hover { background: var(--mk-dark-2); border-color: var(--mk-dark-2); }
+    background: var(--mk-night) !important;
+    border-color: var(--mk-night) !important;
+    color: #fff !important;
+    border-radius: var(--mk-radius-pill) !important;
+}
+.css_quantity {
+    .btn, .btn .fa { color: var(--mk-text) !important; }
+    .btn:hover { color: var(--mk-primary) !important; }
+    input { font-weight: 700; }
 }
 
-// ---------- 5. Carrito y checkout ----------
-.oe_cart,
-.o_total_card,
-#o_cart_summary .card,
-.o_wsale_accordion .accordion-item {
+// ---------- 6. Carrito y checkout ----------
+.oe_cart, .o_total_card, #o_cart_summary .card, .o_wsale_accordion .accordion-item {
     border-color: var(--mk-border) !important;
-    border-radius: var(--mk-radius) !important;
+    border-radius: var(--mk-radius-lg) !important;
 }
 .o_total_card { background: var(--mk-surface); box-shadow: var(--mk-shadow); }
 .o_wizard .o_wizard_step_active .o_wizard_steplabel,
@@ -311,44 +361,118 @@ del .oe_currency_value {
 .o_wizard .o_wizard_step_active .o_wizard_circle,
 .o_wizard .bg-primary { background-color: var(--mk-primary) !important; }
 
-// ---------- 6. Formularios y botones generales ----------
+// ---------- 7. Botones y formularios ----------
+// Odoo pinta .btn-primary con su color de paleta: se fuerza el de la marca
 .btn-primary {
     --bs-btn-bg: var(--mk-primary);
     --bs-btn-border-color: var(--mk-primary);
-    --bs-btn-color: var(--mk-primary-text);
     --bs-btn-hover-bg: var(--mk-primary-hover);
     --bs-btn-hover-border-color: var(--mk-primary-hover);
-    --bs-btn-hover-color: var(--mk-primary-text);
     --bs-btn-active-bg: var(--mk-primary-hover);
-    --bs-btn-active-border-color: var(--mk-primary-hover);
-    --bs-btn-disabled-bg: var(--mk-primary);
-    --bs-btn-disabled-border-color: var(--mk-primary);
-    font-weight: 600;
+    --bs-btn-color: #fff;
+    --bs-btn-hover-color: #fff;
+    background-color: var(--mk-primary) !important;
+    border-color: var(--mk-primary) !important;
+    color: #fff !important;
+    font-weight: 700;
+    &:hover, &:focus { background-color: var(--mk-primary-hover) !important; border-color: var(--mk-primary-hover) !important; }
 }
 .btn-outline-primary {
-    --bs-btn-color: var(--mk-primary);
-    --bs-btn-border-color: var(--mk-primary);
-    --bs-btn-hover-bg: var(--mk-primary);
-    --bs-btn-hover-border-color: var(--mk-primary);
-    --bs-btn-hover-color: var(--mk-primary-text);
+    color: var(--mk-primary) !important;
+    border-color: var(--mk-primary) !important;
+    &:hover { background-color: var(--mk-primary) !important; color: #fff !important; }
 }
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--mk-primary);
+.btn-link { color: var(--mk-link) !important; }
+.form-control, .form-select { border-radius: var(--mk-radius-sm); }
+.form-control:focus, .form-select:focus {
+    border-color: var(--mk-coral);
     box-shadow: 0 0 0 .2rem var(--mk-focus);
 }
-.form-check-input:checked {
-    background-color: var(--mk-primary);
-    border-color: var(--mk-primary);
-}
-.badge.text-bg-primary,
-.badge.bg-primary { background-color: var(--mk-primary) !important; }
 
-// ---------- 7. Pie de página ----------
-footer#bottom,
-#footer,
-.o_footer_copyright {
-    background: var(--mk-dark) !important;
+// ---------- 8. Paginación ----------
+.pagination {
+    gap: .3rem;
+    .page-link {
+        color: var(--mk-text) !important;
+        border-radius: var(--mk-radius-pill) !important;
+        border-color: var(--mk-border) !important;
+        min-width: 2.4rem;
+        text-align: center;
+        font-weight: 600;
+    }
+    .page-item.active .page-link {
+        background: var(--mk-gradient-cta) !important;
+        border-color: transparent !important;
+        color: #fff !important;
+    }
+}
+.breadcrumb a { color: var(--mk-link) !important; text-decoration: none; }
+
+// ---------- 9. Carruseles y banners (bloques nativos del editor) ----------
+// Banner principal (bloque "Carrusel"): esquinas redondeadas y controles modernos
+.s_carousel_wrapper, .s_carousel, .s_image_gallery.carousel, .s_quotes_carousel {
+    border-radius: var(--mk-radius-lg);
+    overflow: hidden;
+}
+.carousel-control-prev, .carousel-control-next {
+    width: 3rem;
+    height: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 1rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .92);
+    box-shadow: var(--mk-shadow);
+    opacity: 1;
+    .carousel-control-prev-icon, .carousel-control-next-icon,
+    .oi, .fa { filter: invert(1) brightness(.2); width: 1.1rem; height: 1.1rem; }
+    &:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+}
+.carousel-indicators {
+    [data-bs-target] {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 0;
+        background-color: rgba(255, 255, 255, .7);
+        opacity: 1;
+        transition: width .25s ease, background-color .25s ease;
+    }
+    .active {
+        width: 28px;
+        background-color: var(--mk-coral);
+    }
+}
+// Carrusel de productos (bloque "Productos" en modo carrusel)
+.s_dynamic_snippet_products {
+    .s_dynamic_snippet_title h4, .s_dynamic_snippet_title h3, .s_dynamic_snippet_title h2 {
+        font-weight: 800;
+    }
+    .s_dynamic_snippet_title .btn,
+    .s_dynamic_snippet_title a {
+        border-radius: var(--mk-radius-pill);
+        font-weight: 600;
+    }
+    .carousel-control-prev, .carousel-control-next { margin: 0 -.5rem; }
+}
+// Sección con fondo de degradado: agregar la clase "mk-bg-gradient" en el editor
+.mk-bg-gradient {
+    background: var(--mk-gradient) !important;
+    color: #fff;
+    h1, h2, h3, h4, p { color: #fff !important; }
+}
+// Tarjeta de banner: agregar la clase "mk-banner" a una imagen o columna
+.mk-banner {
+    border-radius: var(--mk-radius-lg) !important;
+    overflow: hidden;
+    box-shadow: var(--mk-shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+    &:hover { transform: translateY(-3px); box-shadow: var(--mk-shadow-hover); }
+}
+
+// ---------- 10. Pie de página ----------
+footer#bottom, #footer, .o_footer_copyright {
+    background: var(--mk-night) !important;
     color: var(--mk-on-dark-muted) !important;
 }
 #footer {
@@ -357,39 +481,46 @@ footer#bottom,
         content: "";
         position: absolute;
         inset: 0 0 auto 0;
-        height: 3px;
-        background: var(--mk-filter-strip);
+        height: 4px;
+        background: var(--mk-gradient);
     }
-    h1, h2, h3, h4, h5, h6, .h5, .h6 { color: var(--mk-on-dark) !important; }
-    p, li, span, div { color: inherit; }
+    h1, h2, h3, h4, h5, h6, .h5, .h6 { color: #fff !important; font-weight: 700; }
 }
-#footer a,
-.o_footer_copyright a {
-    color: var(--mk-on-dark) !important;
-    &:hover { color: var(--mk-yellow) !important; }
+#footer a, .o_footer_copyright a {
+    color: #fff !important;
+    text-decoration: none;
+    &:hover { color: var(--mk-sun) !important; }
 }
-.o_footer_copyright { border-top: 1px solid var(--mk-dark-2) !important; }
+.o_footer_copyright { border-top: 1px solid var(--mk-night-2) !important; }
+// Íconos sociales: el círculo es el propio <i>, no el enlace
+#footer .s_social_media a,
+.o_footer_copyright .s_social_media a {
+    background: transparent !important;
+    > i.fa, > .fa {
+        width: 2.6rem;
+        height: 2.6rem;
+        background: var(--mk-night-2) !important;
+        color: #fff !important;
+        box-shadow: none !important;
+        transition: background .2s ease, transform .2s ease;
+    }
+    &:hover > i.fa, &:hover > .fa {
+        background: var(--mk-gradient-cta) !important;
+        transform: translateY(-2px);
+    }
+}
 
+// Celular: controles más pequeños (se desliza con el dedo) y círculos de 60 px
+@media (max-width: 575.98px) {
+    .carousel-control-prev, .carousel-control-next { display: none; }
+    .o_wsale_filmstip .o_image_40_cover { width: 60px !important; height: 60px !important; }
+    .o_wsale_filmstip li a > .btn { font-size: .75rem; }
+    #product_detail #product_details .product_price .oe_price { font-size: 1.6rem; }
+}
+
+// ---------- 11. Accesibilidad ----------
 @media (prefers-reduced-motion: reduce) {
-    .oe_product_cart { transition: none; }
-    .oe_product_cart:hover { transform: none; }
-}
-
-// ---------- Ajustes finos ----------
-// Sin subrayado en navegación, tarjetas, filtros y pie (solo al pasar el mouse en el pie)
-.mk-header a,
-.oe_product_cart a,
-#products_grid_before a,
-#footer a,
-.o_footer_copyright a { text-decoration: none; }
-#footer a:hover { text-decoration: underline; }
-
-// Precio con descuento: el precio anterior arriba, el actual abajo, sin partirse
-.oe_product_cart .product_price {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-    line-height: 1.15;
-    white-space: nowrap;
-    del { margin: 0 !important; font-size: .8rem; }
+    .oe_product_cart, .o_carousel_product_card, .mk-banner,
+    .o_wsale_filmstip .o_image_40_cover { transition: none !important; }
+    .oe_product_cart:hover, .o_carousel_product_card:hover, .mk-banner:hover { transform: none !important; }
 }
